@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="scene">
+
+        <div class="card-3d welcome-card">
+
+            <div class="card-header">
+                <div class="eyebrow">login realizado</div>
+                <h1>Bem-vindo,<br><em>{{ nome }}</em></h1>
+                <p class="subtitle">Voce entrou como <code>{{ usuario }}</code>.</p>
+            </div>
+
+            <a href="{{ url_for('login') }}" class="btn" style="display:inline-block; text-align:center; text-decoration:none; margin-top: 8px;">
+                Sair
+            </a>
+
+        </div>
+
+    </div>
+
+   
+
+</body>
+</html>

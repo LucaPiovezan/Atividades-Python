@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}Pagina{% endblock %} - Luca Piovezan</title>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="menu-header">
+            <div class="label">portfolio</div>
+            <div class="name">Luca<br>Piovezan</div>
+            <div class="role">Design &amp; Desenvolvimento</div>
+        </div>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>
+                        <span class="nav-dot"></span>
+                        Sobre mim
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('page1') }}" {% if request.endpoint == 'page1' %}class="active"{% endif %}>
+                        <span class="nav-dot"></span>
+                        Projetos
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('page2') }}" {% if request.endpoint == 'page2' %}class="active"{% endif %}>
+                        <span class="nav-dot"></span>
+                        Interesses
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="menu-footer">
+            <a href="https://lucapiovezan.github.io/luca.dev/" target="_blank" class="portfolio-link">
+                <span>portfolio online</span>
+                lucapiovezan.github.io
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="scene">
+
+        <div class="card-3d">
+
+            <div class="card-header">
+                <div class="eyebrow">acesso restrito</div>
+                <h1>Entrar</h1>
+                <p class="subtitle">Digite suas credenciais para continuar.</p>
+            </div>
+
+            <form method="POST" class="form" id="loginForm">
+
+                <div class="field">
+                    <label for="usuario">Usuário</label>
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="seu usuário"
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="senha">Senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="••••••••"
+                        required
+                    >
+                </div>
+
+                {% if erro %}
+                <div class="erro">{{ erro }}</div>
+                {% endif %}
+
+                <button type="submit" class="btn">Entrar</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>
