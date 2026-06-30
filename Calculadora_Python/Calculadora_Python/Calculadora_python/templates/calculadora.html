@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="scene">
+    <div class="card">
+
+        <header class="card-header">
+            <span class="logo-mark">計算機 &nbsp;·&nbsp; Flask + Python</span>
+            <h1>Calculadora</h1>
+            <p class="subtitle">Operações matemáticas</p>
+        </header>
+
+        <form method="POST" action="{{ url_for('index') }}" class="calc-form">
+
+            <div class="form-inputs">
+                <div class="field-group" id="grupo-num1">
+                    <label for="num1" id="label-num1">Primeiro número</label>
+                    <div class="input-wrap">
+                        <input type="number" id="num1" name="num1" step="any" required
+                               placeholder="0"
+                               value="{{ request.form.get('num1', '') }}">
+                    </div>
+                </div>
+
+                <div class="field-group" id="grupo-num2">
+                    <label for="num2" id="label-num2">Segundo número</label>
+                    <div class="input-wrap">
+                        <input type="number" id="num2" name="num2" step="any"
+                               placeholder="0"
+                               value="{{ request.form.get('num2', '') }}">
+                    </div>
+                </div>
+
+                <div class="field-group" id="grupo-num3">
+                    <label for="num3" id="label-num3">Coeficiente C</label>
+                    <div class="input-wrap">
+                        <input type="number" id="num3" name="num3" step="any"
+                               placeholder="0"
+                               value="{{ request.form.get('num3', '') }}">
+                    </div>
+                </div>
+            </div>
+
+            {% set op = request.form.get('operacao', '+') %}
+            <span class="ops-label">Operação</span>
+            <div class="ops-grid">
+                {% set operacoes = [
+                    ('+',    '＋', 'Somar'),
+                    ('-',    '－', 'Subtrair'),
+                    ('*',    '×',  'Multiplicar'),
+                    ('/',    '÷',  'Dividir'),
+                    ('**',   'xⁿ', 'Potência'),
+                    ('sqrt', '√',  'Raiz'),
+                    ('log',  '㏒', 'Logaritmo'),
+                    ('bhaskara', 'ax²', 'Bhaskara')
+                ] %}
+                {% for val, sym, label in operacoes %}
+                <label class="op-btn">
+                    <input type="radio" name="operacao" value="{{ val }}"
+                           {% if op == val %}checked{% endif %}>
+                    <span class="sym">{{ sym }}</span>
+                    <span class="op-label">{{ label }}</span>
+                </label>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn-calcular">Calcular</button>
+
+        </form>
+
+        {% if etapas %}
+        <div class="resultado-box {% if 'Erro' in resultados|string %}erro{% endif %}">
+            <div class="resultado-label">Resultado</div>
+            <div class="resultado-etapa">{{ etapas }}</div>
+            <div class="resultado-valor">{{ resultados }}</div>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="link-limpar">Limpar</a>
+
+    </div>
+</div>
+
+</body>
+</html>
