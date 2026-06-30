@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Notas{% endblock %}
+{% block content %}
+    <h1>NOTAS</h1>
+    <ul>
+        {% for aluno in alunos %}
+            <li>
+                <span><strong>{{ aluno.nome }}</strong> (Nota: {{ aluno.nota }})</span>
+                {% if aluno.nota >= 7 %}
+                    <span>Aprovado</span>
+                {% else %}
+                    <span>Reprovado</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
