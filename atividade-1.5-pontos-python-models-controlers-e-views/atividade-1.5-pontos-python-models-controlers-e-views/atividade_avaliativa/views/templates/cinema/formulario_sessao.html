@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}Nova Sessão{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-plus-circle"></i> Nova Sessão</h1>
+</div>
+
+<div class="form-card">
+    <form method="POST" action="{{ url_for('cinema.cadastrar_sessao') }}">
+        <div class="form-grupo">
+            <label><i class="fas fa-film" style="margin-right: 6px;"></i> Filme</label>
+            <select name="filme_id" required>
+                <option value="">Selecione o filme...</option>
+                {% for filme in filmes %}
+                <option value="{{ filme.id }}">{{ filme.titulo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-grupo">
+            <label><i class="fas fa-door-open" style="margin-right: 6px;"></i> Sala</label>
+            <select name="sala_id" required>
+                <option value="">Selecione a sala...</option>
+                {% for sala in salas %}
+                <option value="{{ sala.id }}">Sala {{ sala.numero }} — {{ sala.capacidade }} lugares</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-grupo">
+            <label><i class="far fa-calendar-alt" style="margin-right: 6px;"></i> Data e Hora</label>
+            <input type="datetime-local" name="data_hora" required>
+        </div>
+
+        <div class="form-grupo">
+            <label><i class="fas fa-ticket-alt" style="margin-right: 6px;"></i> Preço do Ingresso (R$)</label>
+            <input type="number" name="preco" step="any" min="0" placeholder="Ex: 24,90" required>
+        </div>
+
+        <div class="form-actions">
+            <a class="back-link" href="{{ url_for('cinema.index') }}">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Salvar Sessão
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
