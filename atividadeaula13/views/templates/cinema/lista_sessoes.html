@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %}Programação{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-clapperboard"></i> Programação do Cinema</h1>
+    <a class="btn btn-primary" href="{{ url_for('cinema.cadastrar_sessao') }}">
+        <i class="fas fa-plus"></i> Nova Sessão
+    </a>
+</div>
+
+{% if sessoes %}
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Filme</th>
+                <th>Sala</th>
+                <th>Data / Hora</th>
+                <th>Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sessao in sessoes %}
+            <tr>
+                <td>
+                    {{ sessao.filme.titulo }}
+                    {% if sessao.filme.classificacao %}
+                    <span class="badge badge-class">{{ sessao.filme.classificacao }}</span>
+                    {% endif %}
+                </td>
+                <td><span class="badge badge-sala"><i class="fas fa-door-open"></i> Sala {{ sessao.sala.numero }}</span></td>
+                <td><i class="far fa-calendar-alt" style="color: var(--texto-claro); margin-right: 6px;"></i>{{ sessao.data_hora.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td><span class="badge badge-preco"><i class="fas fa-ticket-alt"></i> R$ {{ "%.2f"|format(sessao.preco) }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fas fa-film"></i>
+    <h2>Nenhuma sessão cadastrada</h2>
+    <p>Comece cadastrando a primeira sessão da programação.</p>
+    <a class="btn btn-primary" href="{{ url_for('cinema.cadastrar_sessao') }}">
+        <i class="fas fa-plus"></i> Criar Sessão
+    </a>
+</div>
+{% endif %}
+{% endblock %}
